@@ -12,19 +12,31 @@ last_update = 0
 # button_b = robot.ButtonB()
 # button_c = robot.ButtonC()
 
-# interpret receiver inputs
+motors = robot.Motors()
+right = motors.right_motor_pwm
+left = motors.left_motor_pwm
+right_dir = motors.right_motor_dir
+left_dir = motors.left_motor_dir
 
+# receiver PWM inputs
+# interpret receiver inputs
+# left_input = 
+# right_input = 
 
 # Display the interpreted receiver inputs
-# Top of display = 64 pixels
-# Top of rectangle = 40 pixels
-# Max height of rectangle = 64-40 = 24 pixels
-# left or right are numbers with a value between -1023..1023
-scale = 24/(2*1023)
+# Bottom of display = 64 pixels
+# Top of plot = 40 pixels
+# Max height of plot = 64-40 = 24 pixels
+# left and right are a value between 0..1023
+# left_dir and right_dir are 1 for forward and 0 for reverse
+plot_top = 40
+plot_height = 24
+scale = plot_height/(1023*2)
+zero_crossing = plot_top + (plot_height/2)
 
-display.fill_rect(0, 40, 128, 24, 0)
+display.fill_rect(0, plot_top, 128, plot_height, 0)
 
-display.fill_rect(36, 64-int(left[0]*scale), 8, int(left[0]*scale), 1)
-display.fill_rect(84, 64-int(right[0]*scale), 8, int(right[0]*scale), 1)
+display.fill_rect(36, 64-int(left_input*scale), 8, int(left_input*scale), 1)
+display.fill_rect(84, 64-int(right_input*scale), 8, int(right_input*scale), 1)
 
 display.show()
